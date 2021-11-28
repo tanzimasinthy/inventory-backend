@@ -1,11 +1,6 @@
-package com.inventory.model;
+package com.inventory.dto;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-
-public class User {
-    @Id
-    private ObjectId id;
+public class UserCreateDTO {
     private String name;
     private String username;
     private String mobileNumber;
@@ -14,11 +9,10 @@ public class User {
     private String adminPassword;
     private String status;
 
-    public User() {
+    public UserCreateDTO() {
     }
 
-    public User(ObjectId id, String name, String username, String mobileNumber, String password, String address, String adminPassword, String status) {
-        this.id = id;
+    public UserCreateDTO(String name, String username, String mobileNumber, String password, String address, String adminPassword, String status) {
         this.name = name;
         this.username = username;
         this.mobileNumber = mobileNumber;
@@ -26,14 +20,6 @@ public class User {
         this.address = address;
         this.adminPassword = adminPassword;
         this.status = status;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getName() {

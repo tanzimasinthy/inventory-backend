@@ -22,7 +22,7 @@ public class TransactionLogController {
         return result;
     }
 
-    @RequestMapping(value = "/product/transaction-list", method = RequestMethod.GET)
+    @RequestMapping(value = "/transaction/transaction-list", method = RequestMethod.GET)
     public ResponseDTO getList(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = transactionLogService.getList();

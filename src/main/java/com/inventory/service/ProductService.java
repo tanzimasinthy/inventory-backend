@@ -1,14 +1,11 @@
 package com.inventory.service;
 
-import com.inventory.dto.OfficerCreateDTO;
 import com.inventory.dto.ProductCreateDTO;
 import com.inventory.dto.ProductUpdateDTO;
 import com.inventory.dto.ResponseDTO;
 import com.inventory.enums.Authority;
-import com.inventory.model.Officer;
 import com.inventory.model.Product;
 import com.inventory.model.dummy.User;
-import com.inventory.repository.OfficerRepository;
 import com.inventory.repository.ProductRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

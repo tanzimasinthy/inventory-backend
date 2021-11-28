@@ -2,10 +2,7 @@ package com.inventory.controller;
 
 import com.inventory.constant.HttpHeader;
 import com.inventory.dto.*;
-import com.inventory.model.Product;
 import com.inventory.model.dummy.User;
-import com.inventory.repository.ProductRepository;
-import com.inventory.service.OfficerService;
 import com.inventory.service.ProductService;
 import com.inventory.utills.Utils;
 import org.bson.types.ObjectId;

@@ -1,8 +1,6 @@
 package com.inventory.repository;
 
 import com.inventory.model.Category;
-import com.inventory.model.Officer;
-import com.inventory.model.Product;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
