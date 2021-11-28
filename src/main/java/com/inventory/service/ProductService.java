@@ -85,6 +85,7 @@ import java.util.List;
             return output.generateErrorResponse("Permission Denied!!");
         }
     }
+
     public ResponseDTO delete(ObjectId id,User requester)
     {
         if (requester.hasAuthority(Authority.ROLE_ADMIN))

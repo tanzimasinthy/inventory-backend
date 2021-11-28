@@ -12,5 +12,6 @@ public interface TransactionRepository extends MongoRepository <TransactionLog, 
 {
     public TransactionLog findByNameAndStatus(String name, String status);
     List<TransactionLog> findAllByStatus(String status);
+    public TransactionLog findByIdAndStatus(ObjectId id, String status);
 
 }

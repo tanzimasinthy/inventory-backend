@@ -1,8 +1,6 @@
 package com.inventory.service;
 
-import com.inventory.dto.ProductCreateDTO;
-import com.inventory.dto.ResponseDTO;
-import com.inventory.dto.TransactionLogCreateDTO;
+import com.inventory.dto.*;
 import com.inventory.enums.Authority;
 import com.inventory.model.Product;
 import com.inventory.model.TransactionLog;
@@ -53,4 +51,64 @@ public class TransactionLogService {
             return output.generateSuccessResponse(transactionLogs, "Success!");
         }
     }
+
+
+    public ResponseDTO get(ObjectId id) {
+        TransactionLog transactionLog = transactionRepository.findByIdAndStatus(id, "V");
+        if (transactionLog == null) {
+            return output.generateErrorResponse("No data found");
+
+        } else {
+            return output.generateSuccessResponse(transactionLog, "Success");
+        }
+
+    }
+
+    public ResponseDTO update(TransactionLogUpdateDTO input, ObjectId id, User requester) {
+        TransactionLog transactionLog;
+
+        if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
+            transactionLog = transactionRepository.findByIdAndStatus(id, "V");
+            if (transactionLog == null) {
+                transactionLog = new TransactionLog();
+                transactionLog.setName(input.getName());
+                transactionLog.setBillNo(input.getBillNo());
+                transactionLog.setId(new ObjectId());
+                transactionLog.setItems(input.getItems());
+                transactionLog.setMobileNumber(input.getMobileNumber());
+                transactionLog.setTotal(input.getTotal());
+                transactionLog.setDate(input.getDate());
+                transactionLog.setStatus("V");
+                transactionRepository.save(transactionLog);
+                return output.generateSuccessResponse(transactionLog, "Successfully updated");
+            } else {
+                return output.generateErrorResponse("NO data found");
+            }
+
+        } else {
+            return output.generateErrorResponse("Permission Denied!!");
+        }
+    }
+
+    public ResponseDTO delete(ObjectId id,User requester)
+    {
+        if (requester.hasAuthority(Authority.ROLE_ADMIN))
+        {
+            TransactionLog transactionLog = transactionRepository.findByIdAndStatus(id, "V");
+            if (transactionLog == null) {
+                return output.generateErrorResponse("You have entered a wrong id");
+            } else {
+                transactionLog.setStatus("D");
+                transactionRepository.save(transactionLog);
+                return output.generateSuccessResponse(transactionLog, "success");
+            }
+
+        }else
+        {
+            return output.generateErrorResponse("Permission Denied!!");
+        }
+
+    }
+
+
 }

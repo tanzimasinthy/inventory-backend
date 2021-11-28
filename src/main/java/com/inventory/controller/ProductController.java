@@ -38,6 +38,7 @@ public class ProductController {
         ResponseDTO result = productService.get(id);
         return result;
     }
+
     @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
     public ResponseDTO update(@PathVariable("id") ObjectId prodId , @RequestBody ProductUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
@@ -46,6 +47,7 @@ public class ProductController {
 
         return result;
     }
+
     @RequestMapping(value = "/product/{id}",method = RequestMethod.DELETE)
     public ResponseDTO delete(@PathVariable("id") ObjectId id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
