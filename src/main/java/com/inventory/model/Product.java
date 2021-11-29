@@ -15,10 +15,6 @@ public class Product {
     public Product() {
     }
 
-    public Product(String status) {
-        this.status = status;
-    }
-
     public Product(ObjectId id, String name, int price, String category, int quantity) {
         this.id = id;
         this.name = name;

@@ -26,18 +26,14 @@ public class Utils {
         User currentUser = new User();
         try {
             currentUser.setUsername(currentUserJO.has("username") ? currentUserJO.get("username").getAsString() : null);
-            currentUser.setEnabled(currentUserJO.has("isEnabled") ? currentUserJO.get("isEnabled").getAsBoolean() : false);
-            currentUser.setSection(currentUserJO.has("section") ? currentUserJO.get("section").getAsString() : "");
             String authoritiesStr = currentUserJO.has("authorities") ? currentUserJO.get("authorities").getAsString() : "";
             List<String> authorityStrList = Arrays.asList(authoritiesStr.split(","));
             List<Authority> authorities = new ArrayList<>();
             for (String authorityStr : authorityStrList) {
                 if(authorityStr.equals(Authority.ROLE_ADMIN.getAuthority())) {
                     authorities.add(Authority.ROLE_ADMIN);
-                } else if(authorityStr.equals(Authority.ROLE_OFFICER.getAuthority())) {
-                    authorities.add(Authority.ROLE_OFFICER);
-                } else if(authorityStr.equals(Authority.ROLE_GUEST.getAuthority())) {
-                    authorities.add(Authority.ROLE_GUEST);
+                } else if(authorityStr.equals(Authority.ROLE_EMPLOYEE.getAuthority())) {
+                    authorities.add(Authority.ROLE_EMPLOYEE);
                 } else if (authorityStr.equals(Authority.ANONYMOUS.getAuthority())) {
                     authorities.add(Authority.ANONYMOUS);
                 }
@@ -82,11 +78,16 @@ public class Utils {
         headers.add("requester", userStr);
         return headers;
 
-
+    }
+    public static String generateRandomNumber(int length) {
+        int number = (int) Math.pow(10, length - 1);
+        number = number + new Random().nextInt(9 * number);
+        return Integer.toString(number);
+    }
    /* public static HttpHeaders generateHttpHeaders(String userStr) {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.add("current-user", userStr);
         return headers;
-    */}
+    }*/
 }

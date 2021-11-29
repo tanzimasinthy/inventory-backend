@@ -7,19 +7,17 @@ public class UserCreateDTO {
     private String password;
     private String address;
     private String adminPassword;
-    private String status;
 
     public UserCreateDTO() {
     }
 
-    public UserCreateDTO(String name, String username, String mobileNumber, String password, String address, String adminPassword, String status) {
+    public UserCreateDTO(String name, String username, String mobileNumber, String password, String address, String adminPassword) {
         this.name = name;
         this.username = username;
         this.mobileNumber = mobileNumber;
         this.password = password;
         this.address = address;
         this.adminPassword = adminPassword;
-        this.status = status;
     }
 
     public String getName() {
@@ -70,11 +68,4 @@ public class UserCreateDTO {
         this.adminPassword = adminPassword;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

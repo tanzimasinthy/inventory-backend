@@ -7,10 +7,13 @@ import com.inventory.model.TransactionLog;
 import com.inventory.model.dummy.User;
 import com.inventory.repository.ProductRepository;
 import com.inventory.repository.TransactionRepository;
+import com.inventory.utills.Utils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,27 +22,46 @@ public class TransactionLogService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     public ResponseDTO create(TransactionLogCreateDTO input, User requester) {
         TransactionLog transactionLog = new TransactionLog();
-
-        if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
-            transactionLog = transactionRepository.findByNameAndStatus(input.getName(), "V");
-            if (transactionLog == null) {
-                transactionLog = new TransactionLog();
-                transactionLog.setName(input.getName());
-                transactionLog.setBillNo(input.getBillNo());
-                transactionLog.setId(new ObjectId());
-                transactionLog.setItems(input.getItems());
-                transactionLog.setMobileNumber(input.getMobileNumber());
-                transactionLog.setTotal(input.getTotal());
-                transactionLog.setDate(input.getDate());
-                transactionLog.setStatus("V");
-                transactionRepository.save(transactionLog);
-            } else {
-                return output.generateErrorResponse("Already exist");
+        List<Product> products = new ArrayList<>();
+        if (input != null && input.getCheckOutDTOS().size() > 0) {
+            for (int i=0 ; i < input.getCheckOutDTOS().size(); i++){
+                Product product = new Product();
+                //TODO: use findByIdAndStatus Instead of findByNameAndStatus
+                product = productRepository.findByNameAndStatus(input.getCheckOutDTOS().get(i).getItemName(), "V");
+                if (product.getQuantity() > 0){
+                    product.setQuantity(product.getQuantity() - 1);
+                    productRepository.save(product);
+                } else {
+                    return output.generateErrorResponse(product.getName() + " Stock Out.");
+                }
+                products.add(product);
             }
-
+        } else {
+            return output.generateErrorResponse("Empty Cart");
         }
+
+
+        List<String> items = new ArrayList<>();
+        for (int i=0 ; i < products.size(); i++){
+            items.add(products.get(i).getName());
+        }
+
+        String billNo = Utils.generateRandomNumber(6);
+        transactionLog = new TransactionLog();
+        transactionLog.setBillNo(billNo);
+        transactionLog.setId(new ObjectId());
+        transactionLog.setItems(items);
+        transactionLog.setMobileNumber(input.getMobileNumber());
+        transactionLog.setTotal(input.getTotal());
+        transactionLog.setDetailsInfo(input.getCheckOutDTOS());
+        transactionLog.setDate(new Date());
+        transactionLog.setStatus("V");
+        transactionRepository.save(transactionLog);
         return output.generateSuccessResponse(transactionLog, "Success");
     }
 
@@ -71,10 +93,8 @@ public class TransactionLogService {
             transactionLog = transactionRepository.findByIdAndStatus(id, "V");
             if (transactionLog == null) {
                 transactionLog = new TransactionLog();
-                transactionLog.setName(input.getName());
                 transactionLog.setBillNo(input.getBillNo());
                 transactionLog.setId(new ObjectId());
-                transactionLog.setItems(input.getItems());
                 transactionLog.setMobileNumber(input.getMobileNumber());
                 transactionLog.setTotal(input.getTotal());
                 transactionLog.setDate(input.getDate());

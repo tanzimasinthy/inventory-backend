@@ -2,6 +2,7 @@ package com.inventory.dto;
 
 import java.util.Date;
 
+//useless dto
 public class TransactionLogUpdateDTO {
     private String billNo;
     private String items;

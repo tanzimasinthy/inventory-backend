@@ -1,54 +1,31 @@
 package com.inventory.dto;
 
-import java.io.Serializable;
-import java.util.Date;
 
-public class TransactionLogCreateDTO implements Serializable {
+import java.util.List;
 
-    private static final long serialVersionUID = -7338047997792280285L;
-
-    private String billNo;
-    private String items;
-    private String name;
+public class TransactionLogCreateDTO {
+    private List<CheckOutDTO> checkOutDTOS;
+    private String customerName;
     private String mobileNumber;
     private int total;
-    private Date date;
 
     public TransactionLogCreateDTO() {
     }
 
-    public TransactionLogCreateDTO(String billNo, String items, String name, String mobileNumber, int total, Date date) {
-        this.billNo = billNo;
-        this.items = items;
-        this.name = name;
-        this.mobileNumber = mobileNumber;
-        this.total = total;
-        this.date = date;
-
+    public List<CheckOutDTO> getCheckOutDTOS() {
+        return checkOutDTOS;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public void setCheckOutDTOS(List<CheckOutDTO> checkOutDTOS) {
+        this.checkOutDTOS = checkOutDTOS;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public String getItems() {
-        return items;
-    }
-
-    public void setItems(String items) {
-        this.items = items;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getMobileNumber() {
@@ -65,13 +42,5 @@ public class TransactionLogCreateDTO implements Serializable {
 
     public void setTotal(int total) {
         this.total = total;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends MongoRepository <TransactionLog, String>
 {
-    public TransactionLog findByNameAndStatus(String name, String status);
+    public TransactionLog findByCustomerNameAndStatus(String name, String status);
     List<TransactionLog> findAllByStatus(String status);
     public TransactionLog findByIdAndStatus(ObjectId id, String status);
 

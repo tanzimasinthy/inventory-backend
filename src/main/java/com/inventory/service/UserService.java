@@ -1,8 +1,6 @@
 package com.inventory.service;
 
-import com.inventory.dto.ProductCreateDTO;
-import com.inventory.dto.ResponseDTO;
-import com.inventory.dto.UserCreateDTO;
+import com.inventory.dto.*;
 import com.inventory.enums.Authority;
 import com.inventory.model.Product;
 import com.inventory.model.User;
@@ -23,21 +21,21 @@ public class UserService {
     public ResponseDTO create(UserCreateDTO input, com.inventory.model.dummy.User requester) {
         User user = new User();
 
-        if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
-            user = userRepository.findByUsernameAndStatus(input.getUsername(), "V");
-            if (user == null) {
-                user = new User();
-                user.setUsername(input.getUsername());
-                user.setAdminPassword(input.getAdminPassword());
-                user.setPassword(input.getPassword());
-                user.setMobileNumber(input.getMobileNumber());
-                user.setStatus("V");
-                userRepository.save(user);
-            } else {
-                return output.generateErrorResponse("Already exist");
-            }
-
+        user = userRepository.findByUsernameAndStatus(input.getUsername(), "V");
+        if (user == null) {
+            user = new User();
+            user.setUsername(input.getUsername());
+            user.setAddress(input.getAddress());
+            user.setAdminPassword(input.getAdminPassword());
+            user.setPassword(input.getPassword());
+            user.setMobileNumber(input.getMobileNumber());
+            user.setAuthority(Authority.ROLE_EMPLOYEE);
+            user.setStatus("V");
+            userRepository.save(user);
+        } else {
+            return output.generateErrorResponse("Already exist");
         }
+
         return output.generateSuccessResponse(user, "Success");
     }
 
@@ -81,5 +79,35 @@ public class UserService {
 
     }
 
+    public ResponseDTO changePassword(ChangePasswordDTO input, com.inventory.model.dummy.User requester) {
+        User user = userRepository.findByUsernameAndStatus(input.getUsername(), "V");
+        if (user == null) {
+            return output.generateErrorResponse("User Not Found!");
+        } else {
+            if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
+                user.setAdminPassword(input.getAdminPassword());
+                userRepository.save(user);
+            } else if (requester.hasAuthority(Authority.ROLE_EMPLOYEE)) {
+                user.setPassword(input.getPassword());
+                userRepository.save(user);
+            }
+        }
+
+        return output.generateSuccessResponse(user, "Success");
+    }
+
+    public ResponseDTO login(LogInDTO input, com.inventory.model.dummy.User requester) {
+        User user = userRepository.findByUsernameAndStatus(input.getUsername(), "V");
+        if (user == null) {
+            return output.generateErrorResponse("User Not Found!");
+        } else {
+            if (user.getPassword().equals(input.getPassword())){
+                return output.generateSuccessResponse(user, "Success");
+            } else {
+                return output.generateErrorResponse("Wrong Password!");
+            }
+        }
+
+    }
 
 }

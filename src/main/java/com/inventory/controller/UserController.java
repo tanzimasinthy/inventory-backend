@@ -1,9 +1,7 @@
 package com.inventory.controller;
 
 import com.inventory.constant.HttpHeader;
-import com.inventory.dto.ResponseDTO;
-import com.inventory.dto.TransactionLogCreateDTO;
-import com.inventory.dto.UserCreateDTO;
+import com.inventory.dto.*;
 import com.inventory.model.dummy.User;
 import com.inventory.service.TransactionLogService;
 import com.inventory.service.UserService;
@@ -17,8 +15,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseDTO create(@RequestBody UserCreateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
+    @RequestMapping(value = "/login", method = RequestMethod.PUT)
+    public ResponseDTO login(@RequestBody LogInDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
+        User requester = Utils.generateUserFromJsonStr(requesterStr);
+        ResponseDTO result = userService.login(input, requester);
+        return result;
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ResponseDTO register(@RequestBody UserCreateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = userService.create(input, requester);
         return result;
@@ -47,6 +52,11 @@ public class UserController {
         return result;
     }
 
-
+    @RequestMapping(value = "/user/change-password", method = RequestMethod.PUT)
+    public ResponseDTO changePassword(@RequestBody ChangePasswordDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
+        User requester = Utils.generateUserFromJsonStr(requesterStr);
+        ResponseDTO result = userService.changePassword(input, requester);
+        return result;
+    }
 
 }

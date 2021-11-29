@@ -1,17 +1,20 @@
 package com.inventory.model;
 
+import com.inventory.dto.CheckOutDTO;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class TransactionLog {
     @Id
     private ObjectId id;
     private String billNo;
-    private String items;
-    private String name;
+    private List<String> items;
+    private String customerName;
     private String mobileNumber;
+    private List<CheckOutDTO> detailsInfo;
     private int total;
     private Date date;
     private String status;
@@ -23,14 +26,16 @@ public class TransactionLog {
         this.status = status;
     }
 
-    public TransactionLog(String billNo, String items, String name, String mobileNumber, int total, Date date) {
+    public TransactionLog(ObjectId id, String billNo, List<String> items, String customerName, String mobileNumber, List<CheckOutDTO> detailsInfo, int total, Date date, String status) {
+        this.id = id;
         this.billNo = billNo;
         this.items = items;
-        this.name = name;
+        this.customerName = customerName;
         this.mobileNumber = mobileNumber;
+        this.detailsInfo = detailsInfo;
         this.total = total;
         this.date = date;
-
+        this.status = status;
     }
 
     public ObjectId getId() {
@@ -49,20 +54,20 @@ public class TransactionLog {
         this.billNo = billNo;
     }
 
-    public String getItems() {
+    public List<String> getItems() {
         return items;
     }
 
-    public void setItems(String items) {
+    public void setItems(List<String> items) {
         this.items = items;
     }
 
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getMobileNumber() {
@@ -95,6 +100,14 @@ public class TransactionLog {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<CheckOutDTO> getDetailsInfo() {
+        return detailsInfo;
+    }
+
+    public void setDetailsInfo(List<CheckOutDTO> detailsInfo) {
+        this.detailsInfo = detailsInfo;
     }
 }
 

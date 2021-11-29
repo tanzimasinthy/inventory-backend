@@ -2,12 +2,9 @@ package com.inventory.controller;
 
 import com.inventory.constant.HttpHeader;
 import com.inventory.dto.CategoryCreateDTO;
-import com.inventory.dto.ProductCreateDTO;
 import com.inventory.dto.ResponseDTO;
-import com.inventory.dto.TransactionLogCreateDTO;
 import com.inventory.model.dummy.User;
 import com.inventory.service.CategoryService;
-import com.inventory.service.ProductService;
 import com.inventory.utills.Utils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>CBL Survey Portal</artifactId>
+	<artifactId>Inventory Management System</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CBL Survey Portal</name>
+	<name>Inventory Management System</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

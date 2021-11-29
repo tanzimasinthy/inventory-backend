@@ -1,7 +1,10 @@
 package com.inventory.model;
 
+import com.inventory.enums.Authority;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 public class User {
     @Id
@@ -12,12 +15,13 @@ public class User {
     private String password;
     private String address;
     private String adminPassword;
+    private Authority authority;
     private String status;
 
     public User() {
     }
 
-    public User(ObjectId id, String name, String username, String mobileNumber, String password, String address, String adminPassword, String status) {
+    public User(ObjectId id, String name, String username, String mobileNumber, String password, String address, String adminPassword, Authority authority, String status) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -25,6 +29,7 @@ public class User {
         this.password = password;
         this.address = address;
         this.adminPassword = adminPassword;
+        this.authority = authority;
         this.status = status;
     }
 
@@ -82,6 +87,14 @@ public class User {
 
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
+    }
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
     }
 
     public String getStatus() {

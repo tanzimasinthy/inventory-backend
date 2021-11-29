@@ -15,7 +15,7 @@ public class TransactionLogController {
     @Autowired
     private TransactionLogService transactionLogService;
 
-    @RequestMapping(value = "/checkout/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     public ResponseDTO create(@RequestBody TransactionLogCreateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = transactionLogService.create(input, requester);
@@ -37,6 +37,7 @@ public class TransactionLogController {
         return result;
     }
 
+    //useless api
     @RequestMapping(value = "/transaction/{id}", method = RequestMethod.PUT)
     public ResponseDTO update(@PathVariable("id") ObjectId prodId , @RequestBody TransactionLogUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
