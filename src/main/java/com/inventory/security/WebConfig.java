@@ -14,8 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("x-auth-token", "Content-Type","x-upload-bucket", "x-upload-token", "x-upload-id", "x-upload-part-number", "x-upload-object-key", "x-upload-content-length", "x-upload-content-type", "authorization", "content-range")
-                .exposedHeaders("Content-Type", "x-upload-bucket", "x-upload-token", "x-upload-id", "x-upload-part-number", "x-upload-object-key", "x-upload-content-length", "x-upload-content-type", "authorization", "content-range")
+                .allowedHeaders("x-auth-token", "Content-Type","x-upload-bucket", "x-upload-token", "x-upload-id", "x-upload-part-number", "x-upload-object-key", "x-upload-content-length", "x-upload-content-type", "authorization", "content-range", "requester", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-control-Allow-Credentials","Accept")
+                .exposedHeaders("Content-Type", "x-upload-bucket", "x-upload-token", "x-upload-id", "x-upload-part-number", "x-upload-object-key", "x-upload-content-length", "x-upload-content-type", "authorization", "content-range", "requester", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-control-Allow-Credentials","Accept")
                 .allowCredentials(false).maxAge(3600);
     }
 }
