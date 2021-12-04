@@ -10,13 +10,8 @@ public class ProductCreateDTO implements Serializable {
     private int price;
     private String category;
     private int quantity;
-    private String status;
 
     public ProductCreateDTO() {
-    }
-
-    public ProductCreateDTO(String status) {
-        this.status = status;
     }
 
     public ProductCreateDTO(String name, int price, String category, int quantity) {
@@ -59,11 +54,4 @@ public class ProductCreateDTO implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

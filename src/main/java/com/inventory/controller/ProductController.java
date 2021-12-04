@@ -22,9 +22,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/product-list", method = RequestMethod.GET)
-    public ResponseDTO getList(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
+    public ResponseDTO getList(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr, @RequestParam("category") String categoryName) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
-        ResponseDTO result = productService.getList();
+        ResponseDTO result = productService.getList(categoryName);
         return result;
     }
 

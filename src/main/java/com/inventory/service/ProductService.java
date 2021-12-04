@@ -41,7 +41,17 @@ import java.util.List;
         return output.generateSuccessResponse(product, "Success");
     }
 
-    public ResponseDTO getList() {
+    public ResponseDTO getList(String categoryName) {
+
+        if (categoryName != null && !categoryName.equals("")){
+            List<Product> product = productRepository.findAllByCategoryAndStatus(categoryName, "V");
+            if (product == null) {
+                return output.generateErrorResponse("No data found");
+            } else {
+                return output.generateSuccessResponse(product, "Success!");
+            }
+        }
+
         List<Product> product = productRepository.findAllByStatus("V");
         if (product == null) {
             return output.generateErrorResponse("No data found");

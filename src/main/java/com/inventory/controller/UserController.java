@@ -15,6 +15,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseDTO login(@RequestBody LogInDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
