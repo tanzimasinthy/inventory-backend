@@ -28,6 +28,20 @@ public class ProductController {
         return result;
     }
 
+    @RequestMapping(value = "/category/category-list", method = RequestMethod.GET)
+    public ResponseDTO getListByCategory(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr,@RequestParam("category") String categoryName){
+        User requester = Utils.generateUserFromJsonStr(requesterStr);
+        ResponseDTO result = productService.getListByCategory(categoryName);
+        return result;
+    }
+
+    @RequestMapping(value = "/search/search-list", method = RequestMethod.GET)
+    public ResponseDTO getListBySearch(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr,@RequestParam("search") String searchName){
+        User requester = Utils.generateUserFromJsonStr(requesterStr);
+        ResponseDTO result = productService.getListBySearch(searchName);
+        return result;
+    }
+
     @RequestMapping(value = "/product/{id}",method = RequestMethod.GET)
     public ResponseDTO get(@PathVariable("id") ObjectId id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {

@@ -51,6 +51,46 @@ import java.util.List;
         }
     }
 
+    public ResponseDTO getListByCategory(String categoryName) {
+
+        if (categoryName != null && !categoryName.equals("")){
+            List<Product> product = productRepository.findAllByCategoryAndStatus(categoryName, "V");
+            if (product == null) {
+                return output.generateErrorResponse("No data found");
+            } else {
+                return output.generateSuccessResponse(product, "Success!");
+            }
+        }
+
+        List<Product> products = productRepository.findAllByStatus("V");
+        if (products == null) {
+            return output.generateErrorResponse("No data found");
+        } else {
+            return output.generateSuccessResponse(products, "Success!");
+        }
+    }
+
+
+    public ResponseDTO getListBySearch(String searchName) {
+
+        if (searchName != null && !searchName.equals("")){
+            List<Product> product = productRepository.findAllBySearchAndStatus(searchName, "V");
+            if (product == null) {
+                return output.generateErrorResponse("No data found");
+            } else {
+                return output.generateSuccessResponse(product, "Success!");
+            }
+        }
+
+        List<Product> products = productRepository.findAllByStatus("V");
+        if (products == null) {
+            return output.generateErrorResponse("No data found");
+        } else {
+            return output.generateSuccessResponse(products, "Success!");
+        }
+    }
+
+
     public ResponseDTO get(ObjectId id) {
         Product product = productRepository.findByIdAndStatus(id, "V");
         if (product == null) {
