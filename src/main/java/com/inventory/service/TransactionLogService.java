@@ -51,6 +51,10 @@ public class TransactionLogService {
             items.add(products.get(i).getName());
         }
 
+        for (int i=0 ; i < input.getCheckOutDTOS().size(); i++){
+            input.setTotal(input.getTotal() + (input.getCheckOutDTOS().get(i).getPrice() * input.getCheckOutDTOS().get(i).getQuantity()));
+        }
+
         String billNo = Utils.generateRandomNumber(6);
         transactionLog = new TransactionLog();
         transactionLog.setBillNo(billNo);
