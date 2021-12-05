@@ -56,6 +56,7 @@ public class TransactionLogService {
         transactionLog.setBillNo(billNo);
         transactionLog.setId(new ObjectId());
         transactionLog.setItems(items);
+        transactionLog.setCustomerName(input.getCustomerName());
         transactionLog.setMobileNumber(input.getMobileNumber());
         transactionLog.setTotal(input.getTotal());
         transactionLog.setDetailsInfo(input.getCheckOutDTOS());
