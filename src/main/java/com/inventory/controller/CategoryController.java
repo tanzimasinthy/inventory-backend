@@ -21,7 +21,7 @@ public class CategoryController {
         ResponseDTO result = categoryService.create(input, requester);
         return result;
     }
-
+//useless
     @RequestMapping(value = "/category/category-list", method = RequestMethod.GET)
     public ResponseDTO getList(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr) {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
@@ -29,7 +29,7 @@ public class CategoryController {
         return result;
     }
 
-
+    //useless
     @RequestMapping(value = "/category/{id}",method = RequestMethod.GET)
     public ResponseDTO get(@PathVariable("id") long id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
