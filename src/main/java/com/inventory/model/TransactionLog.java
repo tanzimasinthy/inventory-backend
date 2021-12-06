@@ -17,7 +17,7 @@ public class TransactionLog {
     @Column(name = "id", nullable = false)
     private long id;
     private String billNo;
-   private String items;
+    private String items;
     private String customerName;
     private String mobileNumber;
    // private List<CheckOutDTO> detailsInfo;

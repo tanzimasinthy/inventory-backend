@@ -83,7 +83,7 @@ import java.util.List;
     public ResponseDTO getListBySearch(String searchName) {
 
         if (searchName != null && !searchName.equals("")){
-            List<Product> product = productRepository.findAllBySearchAndStatus(searchName, "V");
+            List<Product> product = productRepository.findAllByNameAndStatus(searchName, "V");
             if (product == null) {
                 return output.generateErrorResponse("No data found");
             } else {

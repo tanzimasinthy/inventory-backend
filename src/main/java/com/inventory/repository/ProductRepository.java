@@ -17,7 +17,7 @@ public Product findByIdAndStatus(long id, String status);
 List <Product> findAllByStatus(String status);
 List <Product> findAllByCategoryAndStatus(String category, String status);
 public Product findByNameAndStatus(String name, String status);
-List <Product> findAllBySearchAndStatus (String search, String status);
+List <Product> findAllByNameAndStatus (String search, String status);
 
 
 }
