@@ -6,7 +6,7 @@ import com.inventory.model.Product;
 import com.inventory.model.User;
 import com.inventory.repository.ProductRepository;
 import com.inventory.repository.UserRepository;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class UserService {
         }
     }
 
-    public ResponseDTO get(ObjectId id) {
+    public ResponseDTO get(long id) {
         User user = userRepository.findByIdAndStatus(id, "V");
         if (user == null) {
             return output.generateErrorResponse("No data found");
@@ -59,7 +59,7 @@ public class UserService {
 
     }
 
-    public ResponseDTO delete(ObjectId id, com.inventory.model.dummy.User requester)
+    public ResponseDTO delete(long id, com.inventory.model.dummy.User requester)
     {
         if (requester.hasAuthority(Authority.ROLE_ADMIN))
         {

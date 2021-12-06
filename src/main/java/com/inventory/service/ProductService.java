@@ -7,7 +7,7 @@ import com.inventory.enums.Authority;
 import com.inventory.model.Product;
 import com.inventory.model.dummy.User;
 import com.inventory.repository.ProductRepository;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ import java.util.List;
                 product = new Product();
                 product.setName(input.getName());
                 product.setPrice(input.getPrice());
-                product.setId(new ObjectId());
+                //product.setId();
                 product.setCategory(input.getCategory());
                 product.setQuantity(input.getQuantity());
                 product.setStatus("V");
@@ -70,6 +70,15 @@ import java.util.List;
         }
     }
 
+    public ResponseDTO getAllProductCategories() {
+        List<Product> products = productRepository.findAllByStatus( "V");
+        if (products == null) {
+            return output.generateErrorResponse("No data found");
+        } else {
+            return output.generateSuccessResponse(products, "Success!");
+        }
+    }
+
 
     public ResponseDTO getListBySearch(String searchName) {
 
@@ -91,7 +100,7 @@ import java.util.List;
     }
 
 
-    public ResponseDTO get(ObjectId id) {
+    public ResponseDTO get(long id) {
         Product product = productRepository.findByIdAndStatus(id, "V");
         if (product == null) {
             return output.generateErrorResponse("No data found");
@@ -102,7 +111,7 @@ import java.util.List;
 
     }
 
-    public ResponseDTO update(ProductUpdateDTO input, ObjectId id, User requester) {
+    public ResponseDTO update(ProductUpdateDTO input, long id, User requester) {
         Product product;
 
         if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
@@ -124,7 +133,7 @@ import java.util.List;
         }
     }
 
-    public ResponseDTO delete(ObjectId id,User requester)
+    public ResponseDTO delete(long id,User requester)
     {
         if (requester.hasAuthority(Authority.ROLE_ADMIN))
         {

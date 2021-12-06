@@ -5,7 +5,7 @@ import com.inventory.dto.*;
 import com.inventory.model.dummy.User;
 import com.inventory.service.ProductService;
 import com.inventory.utills.Utils;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +28,17 @@ public class ProductController {
         return result;
     }
 
-    @RequestMapping(value = "/category/category-list", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/category-list?category", method = RequestMethod.GET)
     public ResponseDTO getListByCategory(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr,@RequestParam("category") String categoryName){
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = productService.getListByCategory(categoryName);
+        return result;
+    }
+
+    @RequestMapping(value = "/product/all-categories", method = RequestMethod.GET)
+    public ResponseDTO getAllProductCategories(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr){
+        User requester = Utils.generateUserFromJsonStr(requesterStr);
+        ResponseDTO result = productService.getAllProductCategories();
         return result;
     }
 
@@ -43,7 +50,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/{id}",method = RequestMethod.GET)
-    public ResponseDTO get(@PathVariable("id") ObjectId id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO get(@PathVariable("id") long id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = productService.get(id);
@@ -51,7 +58,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
-    public ResponseDTO update(@PathVariable("id") ObjectId prodId , @RequestBody ProductUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO update(@PathVariable("id") long prodId , @RequestBody ProductUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = productService.update(input, prodId, requester);
@@ -60,7 +67,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/product/{id}",method = RequestMethod.DELETE)
-    public ResponseDTO delete(@PathVariable("id") ObjectId id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO delete(@PathVariable("id") long id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = productService.delete(id,requester);

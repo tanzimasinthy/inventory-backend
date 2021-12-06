@@ -6,7 +6,7 @@ import com.inventory.dto.ResponseDTO;
 import com.inventory.model.dummy.User;
 import com.inventory.service.CategoryService;
 import com.inventory.utills.Utils;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/category/{id}",method = RequestMethod.GET)
-    public ResponseDTO get(@PathVariable("id") ObjectId id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO get(@PathVariable("id") long id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = categoryService.get(id);
@@ -40,7 +40,7 @@ public class CategoryController {
 
 
     @RequestMapping(value = "/category/{id}",method = RequestMethod.DELETE)
-    public ResponseDTO delete(@PathVariable("id") ObjectId id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO delete(@PathVariable("id") long id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = categoryService.delete(id,requester);

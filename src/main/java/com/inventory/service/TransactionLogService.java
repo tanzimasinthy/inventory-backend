@@ -8,7 +8,7 @@ import com.inventory.model.dummy.User;
 import com.inventory.repository.ProductRepository;
 import com.inventory.repository.TransactionRepository;
 import com.inventory.utills.Utils;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,12 +58,11 @@ public class TransactionLogService {
         String billNo = Utils.generateRandomNumber(6);
         transactionLog = new TransactionLog();
         transactionLog.setBillNo(billNo);
-        transactionLog.setId(new ObjectId());
-        transactionLog.setItems(items);
+//        transactionLog.setItems(items);
         transactionLog.setCustomerName(input.getCustomerName());
         transactionLog.setMobileNumber(input.getMobileNumber());
         transactionLog.setTotal(input.getTotal());
-        transactionLog.setDetailsInfo(input.getCheckOutDTOS());
+//        transactionLog.setDetailsInfo(input.getCheckOutDTOS());
         transactionLog.setDate(new Date());
         transactionLog.setStatus("V");
         transactionRepository.save(transactionLog);
@@ -80,7 +79,7 @@ public class TransactionLogService {
     }
 
 
-    public ResponseDTO get(ObjectId id) {
+    public ResponseDTO get(long id) {
         TransactionLog transactionLog = transactionRepository.findByIdAndStatus(id, "V");
         if (transactionLog == null) {
             return output.generateErrorResponse("No data found");
@@ -91,7 +90,7 @@ public class TransactionLogService {
 
     }
 
-    public ResponseDTO update(TransactionLogUpdateDTO input, ObjectId id, User requester) {
+    public ResponseDTO update(TransactionLogUpdateDTO input, long id, User requester) {
         TransactionLog transactionLog;
 
         if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
@@ -99,7 +98,6 @@ public class TransactionLogService {
             if (transactionLog == null) {
                 transactionLog = new TransactionLog();
                 transactionLog.setBillNo(input.getBillNo());
-                transactionLog.setId(new ObjectId());
                 transactionLog.setMobileNumber(input.getMobileNumber());
                 transactionLog.setTotal(input.getTotal());
                 transactionLog.setDate(input.getDate());
@@ -115,7 +113,7 @@ public class TransactionLogService {
         }
     }
 
-    public ResponseDTO delete(ObjectId id,User requester)
+    public ResponseDTO delete(long id,User requester)
     {
         if (requester.hasAuthority(Authority.ROLE_ADMIN))
         {

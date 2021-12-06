@@ -6,7 +6,7 @@ import com.inventory.model.dummy.User;
 import com.inventory.service.TransactionLogService;
 import com.inventory.service.UserService;
 import com.inventory.utills.Utils;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
-    public ResponseDTO get(@PathVariable("id") ObjectId id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO get(@PathVariable("id") long id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = userService.get(id);
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/{id}",method = RequestMethod.DELETE)
-    public ResponseDTO delete(@PathVariable("id") ObjectId id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO delete(@PathVariable("id") long id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = userService.delete(id,requester);
