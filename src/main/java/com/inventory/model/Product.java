@@ -18,23 +18,10 @@ public class Product {
     private String name;
     private int price;
     private String category;
-    private String search;
     private int quantity;
     private String status;
 
     public Product() {
-    }
-
-    public String getSearch() {
-        return search;
-    }
-
-    public void setSearch(String search) {
-        this.search = search;
-    }
-
-    public Product(String search) {
-        this.search = search;
     }
 
     public Product(long id, String name, int price, String category, int quantity) {
