@@ -1,14 +1,19 @@
 package com.inventory.model;
 
 import com.inventory.enums.Authority;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class User {
-    @Id
-    private ObjectId id;
+    @javax.persistence.Id
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     private String name;
     private String username;
     private String mobileNumber;
@@ -18,10 +23,18 @@ public class User {
     private Authority authority;
     private String status;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public User() {
     }
 
-    public User(ObjectId id, String name, String username, String mobileNumber, String password, String address, String adminPassword, Authority authority, String status) {
+    public User(long id, String name, String username, String mobileNumber, String password, String address, String adminPassword, Authority authority, String status) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -31,14 +44,6 @@ public class User {
         this.adminPassword = adminPassword;
         this.authority = authority;
         this.status = status;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getName() {

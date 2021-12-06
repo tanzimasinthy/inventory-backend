@@ -6,7 +6,7 @@ import com.inventory.model.dummy.User;
 import com.inventory.service.ProductService;
 import com.inventory.service.TransactionLogService;
 import com.inventory.utills.Utils;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class TransactionLogController {
     }
 
     @RequestMapping(value = "/transaction/{id}",method = RequestMethod.GET)
-    public ResponseDTO get(@PathVariable("id") ObjectId id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO get(@PathVariable("id") long id, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = transactionLogService.get(id);
@@ -39,7 +39,7 @@ public class TransactionLogController {
 
     //useless api
     @RequestMapping(value = "/transaction/{id}", method = RequestMethod.PUT)
-    public ResponseDTO update(@PathVariable("id") ObjectId prodId , @RequestBody TransactionLogUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO update(@PathVariable("id") long prodId , @RequestBody TransactionLogUpdateDTO input, @RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = transactionLogService.update(input, prodId, requester);
@@ -48,7 +48,7 @@ public class TransactionLogController {
     }
 
     @RequestMapping(value = "/checkout/{id}",method = RequestMethod.DELETE)
-    public ResponseDTO delete(@PathVariable("id") ObjectId id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
+    public ResponseDTO delete(@PathVariable("id") long id,@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr)
     {
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = transactionLogService.delete(id,requester);

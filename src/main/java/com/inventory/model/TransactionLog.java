@@ -1,20 +1,26 @@
 package com.inventory.model;
 
 import com.inventory.dto.CheckOutDTO;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class TransactionLog {
     @Id
-    private ObjectId id;
+    @javax.persistence.Id
+    @Column(name = "id", nullable = false)
+    private long id;
     private String billNo;
-    private List<String> items;
+   private String items;
     private String customerName;
     private String mobileNumber;
-    private List<CheckOutDTO> detailsInfo;
+   // private List<CheckOutDTO> detailsInfo;
     private int total;
     private Date date;
     private String status;
@@ -26,23 +32,22 @@ public class TransactionLog {
         this.status = status;
     }
 
-    public TransactionLog(ObjectId id, String billNo, List<String> items, String customerName, String mobileNumber, List<CheckOutDTO> detailsInfo, int total, Date date, String status) {
+    public TransactionLog(long id, String billNo, String items, String customerName, String mobileNumber, List<CheckOutDTO> detailsInfo, int total, Date date, String status) {
         this.id = id;
         this.billNo = billNo;
         this.items = items;
         this.customerName = customerName;
-        this.mobileNumber = mobileNumber;
-        this.detailsInfo = detailsInfo;
+        this.mobileNumber = mobileNumber;;
         this.total = total;
         this.date = date;
         this.status = status;
     }
 
-    public ObjectId getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -54,11 +59,11 @@ public class TransactionLog {
         this.billNo = billNo;
     }
 
-    public List<String> getItems() {
+    public String getItems() {
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(String items) {
         this.items = items;
     }
 
@@ -102,12 +107,12 @@ public class TransactionLog {
         this.status = status;
     }
 
-    public List<CheckOutDTO> getDetailsInfo() {
-        return detailsInfo;
-    }
-
-    public void setDetailsInfo(List<CheckOutDTO> detailsInfo) {
-        this.detailsInfo = detailsInfo;
-    }
+//    public List<CheckOutDTO> getDetailsInfo() {
+//        return detailsInfo;
+//    }
+//
+//    public void setDetailsInfo(List<CheckOutDTO> detailsInfo) {
+//        this.detailsInfo = detailsInfo;
+//    }
 }
 

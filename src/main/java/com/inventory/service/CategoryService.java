@@ -6,7 +6,7 @@ import com.inventory.enums.Authority;
 import com.inventory.model.Category;
 import com.inventory.model.dummy.User;
 import com.inventory.repository.CategoryRepository;
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +45,7 @@ public class CategoryService {
         }
     }
 
-    public ResponseDTO get(ObjectId id) {
+    public ResponseDTO get(long id) {
         Category category = categoryRepository.findByIdAndStatus(id, "V");
         if (category == null) {
             return output.generateErrorResponse("No data found");
@@ -56,7 +56,7 @@ public class CategoryService {
 
     }
 
-    public ResponseDTO delete(ObjectId id,User requester) {
+    public ResponseDTO delete(long id,User requester) {
         if (requester.hasAuthority(Authority.ROLE_ADMIN)) {
             Category category = categoryRepository.findByIdAndStatus(id, "V");
             if (category == null) {

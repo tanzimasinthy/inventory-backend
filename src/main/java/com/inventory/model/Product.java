@@ -1,21 +1,40 @@
 package com.inventory.model;
 
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Product {
     @Id
-    private ObjectId id;
+    @javax.persistence.Id
+    @Column(name = "id", nullable = false)
+    private long id;
     private String name;
     private int price;
     private String category;
+    private String search;
     private int quantity;
     private String status;
 
     public Product() {
     }
 
-    public Product(ObjectId id, String name, int price, String category, int quantity) {
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public Product(String search) {
+        this.search = search;
+    }
+
+    public Product(long id, String name, int price, String category, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -24,11 +43,11 @@ public class Product {
 
     }
 
-    public ObjectId getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,28 +1,34 @@
 package com.inventory.model;
 
-import org.bson.types.ObjectId;
+//import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Category {
     @Id
-    private ObjectId id;
+    @javax.persistence.Id
+    @Column(name = "id", nullable = false)
+    private long id;
     private String name;
     private String status;
 
     public Category() {
     }
 
-    public Category(ObjectId id, String name, String status) {
+    public Category(long id, String name, String status) {
         this.id = id;
         this.name = name;
         this.status = status;
     }
 
-    public ObjectId getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(long id) {
         this.id = id;
     }
 
