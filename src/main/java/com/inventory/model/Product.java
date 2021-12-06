@@ -5,13 +5,16 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Product {
-    @Id
     @javax.persistence.Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
+
     private String name;
     private int price;
     private String category;

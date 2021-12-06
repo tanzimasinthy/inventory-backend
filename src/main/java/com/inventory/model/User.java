@@ -6,11 +6,14 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.List;
 
 @Entity
 public class User {
     @javax.persistence.Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 

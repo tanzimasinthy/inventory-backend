@@ -6,14 +6,16 @@ import org.springframework.data.annotation.Id;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 public class TransactionLog {
-    @Id
     @javax.persistence.Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
     private String billNo;
