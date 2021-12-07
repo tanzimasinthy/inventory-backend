@@ -28,7 +28,7 @@ public class ProductController {
         return result;
     }
 
-    @RequestMapping(value = "/product/category-list?category", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/category-list", method = RequestMethod.GET)
     public ResponseDTO getListByCategory(@RequestHeader(value = HttpHeader.REQUESTER) String requesterStr,@RequestParam("category") String categoryName){
         User requester = Utils.generateUserFromJsonStr(requesterStr);
         ResponseDTO result = productService.getListByCategory(categoryName);
