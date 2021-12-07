@@ -33,8 +33,8 @@ public class TransactionLogService {
                 Product product = new Product();
                 //TODO: use findByIdAndStatus Instead of findByNameAndStatus
                 product = productRepository.findByNameAndStatus(input.getCheckOutDTOS().get(i).getItemName(), "V");
-                if (product.getQuantity() > 0){
-                    product.setQuantity(product.getQuantity() - 1);
+                if (product.getQuantity() > input.getCheckOutDTOS().get(i).getQuantity()){
+                    product.setQuantity(product.getQuantity() - input.getCheckOutDTOS().get(i).getQuantity());
                     productRepository.save(product);
                 } else {
                     return output.generateErrorResponse(product.getName() + " Stock Out.");
