@@ -46,9 +46,9 @@ public class TransactionLogService {
         }
 
 
-        List<String> items = new ArrayList<>();
+        String items = "";
         for (int i=0 ; i < products.size(); i++){
-            items.add(products.get(i).getName());
+            items = products.get(i).getName() + "," + items;
         }
 
         for (int i=0 ; i < input.getCheckOutDTOS().size(); i++){
@@ -58,7 +58,7 @@ public class TransactionLogService {
         String billNo = Utils.generateRandomNumber(6);
         transactionLog = new TransactionLog();
         transactionLog.setBillNo(billNo);
-//        transactionLog.setItems(items);
+        transactionLog.setItems(items);
         transactionLog.setCustomerName(input.getCustomerName());
         transactionLog.setMobileNumber(input.getMobileNumber());
         transactionLog.setTotal(input.getTotal());
